@@ -1,0 +1,6 @@
+{
+  "message.gardenThingy.controls_swapped": "GardenThingy: Swapped controls (Space to attack, Left Click to jump)",
+  "message.gardenThingy.controls_restored": "GardenThingy: Restored default controls",
+  "key.gardenThingy.swapControls": "Swap Controls",
+  "key.categories.gardenThingy": "GardenThingy"
+}

@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "gardenthingy",
+  "version": "${version}",
+  "name": "GardenThingy",
+  "description": "A dumb mod that aims to reimplement the garden control swap of the DulkirMod that is abandoned for 1.21.5 (as far as I know)",
+  "authors": ["Nissya"],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/garden-thingy",
+    "issues": "https://github.com/Nissyaniss/Garden-Thingy/issues",
+    "sources": "https://github.com/Nissyaniss/Garden-Thingy"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/gardenthingy/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "me.nissya.gardenthingy.client.GardenThingyDataGenerator"
+    ],
+    "client": [
+      "me.nissya.gardenthingy.client.GardenThingyClient"
+    ],
+    "main": [
+      "me.nissya.gardenthingy.GardenThingy"
+    ]
+  },
+  "mixins": [
+    "gardenthingy.mixins.json",
+    {
+      "config": "gardenthingy.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
