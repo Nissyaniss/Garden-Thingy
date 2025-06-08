@@ -32,6 +32,8 @@ public class GardenThingyClient implements ClientModInitializer {
             if (swapped) {
                 client.options.jumpKey.setBoundKey(originalJumpKey);
                 client.options.attackKey.setBoundKey(originalAttackKey);
+                MinecraftClient.getInstance().options.getMouseSensitivity().setValue(DEFAULT_SENSITIVITY);
+                client.options.write();
             }
         });
 
