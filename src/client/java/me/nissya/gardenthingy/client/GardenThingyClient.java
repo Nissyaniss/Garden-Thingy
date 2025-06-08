@@ -12,11 +12,11 @@ import org.lwjgl.glfw.GLFW;
 
 
 public class GardenThingyClient implements ClientModInitializer {
+    public static final double DEFAULT_SENSITIVITY = .5;
     private static KeyBinding keyBinding;
     private static boolean swapped = false;
     private static InputUtil.Key originalJumpKey;
     private static InputUtil.Key originalAttackKey;
-    private static Double originalMouseSensitivity;
     private static boolean isOriginalSet = false;
 
     @Override
@@ -32,7 +32,6 @@ public class GardenThingyClient implements ClientModInitializer {
             if (swapped) {
                 client.options.jumpKey.setBoundKey(originalJumpKey);
                 client.options.attackKey.setBoundKey(originalAttackKey);
-                swapped = false;
             }
         });
 
@@ -40,28 +39,24 @@ public class GardenThingyClient implements ClientModInitializer {
             if (client.options != null && !isOriginalSet) {
                 originalJumpKey = client.options.jumpKey.getDefaultKey();
                 originalAttackKey = client.options.attackKey.getDefaultKey();
-                originalMouseSensitivity = client.options.getMouseSensitivity().getValue();
                 isOriginalSet = true;
             }
             if (keyBinding.wasPressed()) {
                 swapped = !swapped;
-
                 if (swapped && client.options != null) {
                     client.options.jumpKey.setBoundKey(InputUtil.Type.MOUSE.createFromCode(0));
                     client.options.attackKey.setBoundKey(InputUtil.fromKeyCode(GLFW.GLFW_KEY_SPACE, 0));
                     if (client.player != null) {
                         client.player.sendMessage(Text.translatable("message.gardenThingy.controls_swapped"), true);
                     }
-                    MinecraftClient.getInstance().options.getMouseSensitivity().setValue(0.1);
-                    MinecraftClient.getInstance().options.write();
+                    MinecraftClient.getInstance().options.getMouseSensitivity().setValue(0.05);
                 } else if (client.options != null) {
                     client.options.jumpKey.setBoundKey(originalJumpKey);
                     client.options.attackKey.setBoundKey(originalAttackKey);
                     if (client.player != null) {
                         client.player.sendMessage(Text.translatable("message.gardenThingy.controls_restored"), true);
                     }
-                    MinecraftClient.getInstance().options.getMouseSensitivity().setValue(originalMouseSensitivity);
-                    MinecraftClient.getInstance().options.write();
+                    MinecraftClient.getInstance().options.getMouseSensitivity().setValue(DEFAULT_SENSITIVITY);
                 }
                 if (client.options != null) {
                     client.options.write();
